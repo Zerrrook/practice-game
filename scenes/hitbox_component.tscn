@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://calb4k2ablw86"]
+
+[sub_resource type="GDScript" id="GDScript_8etsw"]
+script/source = "class_name HitboxComponent
+extends Area2D
+
+signal hit_hurtbox(hurtbox)
+
+func _ready():
+#	Connect on area entered to our hurtbox entered function
+	area_entered.connect(_on_hurtbox_entered)
+
+func _on_hurtbox_entered(hurtbox: HurtboxComponent):
+#	Make sure that the area we are overlapping is a hurtbox
+	if not hurtbox is HurtboxComponent: return
+#	Signal out that we hit a hurtbox
+	hit_hurtbox.emit(hurtbox)
+#	Signal the hurtbox that it was hit
+	hurtbox.hurt.emit(self)
+"
+
+[node name="HitboxComponent" type="Area2D" unique_id=854729257]
+collision_layer = 4
+collision_mask = 3
+script = SubResource("GDScript_8etsw")

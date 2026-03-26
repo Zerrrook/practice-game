@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://bxjg1l3w6gkhh"]
+
+[ext_resource type="Texture2D" uid="uid://dnxbkk2lim031" path="res://assets/sprites/slime_green.png" id="1_mwm88"]
+[ext_resource type="Script" uid="uid://c2bchfowblbu8" path="res://scripts/slime.gd" id="1_qw3lm"]
+[ext_resource type="PackedScene" uid="uid://c5g6fqkyd00j8" path="res://scenes/killzone.tscn" id="2_p8al1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qk783"]
+atlas = ExtResource("1_mwm88")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8egaj"]
+atlas = ExtResource("1_mwm88")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s85si"]
+atlas = ExtResource("1_mwm88")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3j4s"]
+atlas = ExtResource("1_mwm88")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p8al1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qk783")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8egaj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s85si")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3j4s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qw3lm"]
+size = Vector2(8, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6we72"]
+size = Vector2(8, 12)
+
+[node name="SlimeGreen" type="CharacterBody2D" unique_id=1827343217]
+script = ExtResource("1_qw3lm")
+direction = null
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2147114267]
+sprite_frames = SubResource("SpriteFrames_p8al1")
+autoplay = "default"
+frame_progress = 0.54295903
+
+[node name="SurfaceDetector" type="Area2D" parent="." unique_id=147373093]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SurfaceDetector" unique_id=968428105]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_qw3lm")
+
+[node name="Killzone" parent="." unique_id=705594469 instance=ExtResource("2_p8al1")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=1948987806]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_6we72")
+
+[node name="RayCast" type="Node2D" parent="." unique_id=497996253]
+
+[node name="RayRight" type="RayCast2D" parent="RayCast" unique_id=1126470870]
+position = Vector2(-7, 11)
+rotation = -1.5707964
+target_position = Vector2(-4, 0)
+
+[node name="RayLeft" type="RayCast2D" parent="RayCast" unique_id=1891826810]
+position = Vector2(7, 11)
+rotation = -1.5707964
+target_position = Vector2(-4, 0)
+
+[node name="RayRightWall" type="RayCast2D" parent="RayCast" unique_id=79920989]
+position = Vector2(6, 6)
+target_position = Vector2(4, 0)
+
+[node name="RayLeftWall" type="RayCast2D" parent="RayCast" unique_id=772589930]
+position = Vector2(-6, 6)
+target_position = Vector2(-4, 0)
