@@ -3,17 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://c3jifqhcpdk1m" path="res://assets/sprites/knight.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://fpdsplgbc6ju" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="AudioStream" uid="uid://diqbhg2wkhsly" path="res://assets/sounds/jump.wav" id="3_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://bhnv7oaixe558" path="res://scenes/health_component.tscn" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://bdyb5joi2shm2" path="res://scripts/components/hurtbox_component.gd" id="5_qlg0r"]
 [ext_resource type="AudioStream" uid="uid://co0v7dgr5t4tg" path="res://assets/sounds/hurt.wav" id="6_tuyoq"]
 [ext_resource type="PackedScene" uid="uid://cx7j2b2vhx80w" path="res://scenes/knockback_component.tscn" id="7_fjrip"]
 [ext_resource type="PackedScene" uid="uid://gj4ocpnligrl" path="res://scenes/fsm.tscn" id="8_ur7pv"]
-[ext_resource type="Script" uid="uid://bsaeaqri0vf3l" path="res://scripts/player_states/player_run.gd" id="9_y4r1p"]
-[ext_resource type="Script" uid="uid://dyblwbw1ku1mo" path="res://scripts/player_states/player_hurt.gd" id="10_3v2ag"]
-[ext_resource type="Script" uid="uid://hgbcwrvcrmxv" path="res://scripts/player_states/player_jump.gd" id="10_d2wvv"]
 [ext_resource type="Script" uid="uid://ckgcvohxuy10b" path="res://scripts/player_states/player_idle.gd" id="12_3v2ag"]
-[ext_resource type="Script" uid="uid://kahwbfagfjle" path="res://scripts/player_dead.gd" id="13_jej6c"]
-[ext_resource type="PackedScene" uid="uid://d1hbclu5qa0j4" path="res://scenes/GUI/hearts_container.tscn" id="14_f1ej7"]
-[ext_resource type="Script" uid="uid://konpfrhfkt0v" path="res://scripts/player_health_component.gd" id="15_oprun"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ujl30"]
 atlas = ExtResource("1_3vyb7")
@@ -246,7 +241,7 @@ script = ExtResource("1_g2els")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=167537629]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"death"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=1170649696]
@@ -270,8 +265,7 @@ volume_db = -10.0
 stream = ExtResource("6_tuyoq")
 volume_db = -10.0
 
-[node name="PlayerHealthComponent" type="Node2D" parent="." unique_id=32679883]
-script = ExtResource("15_oprun")
+[node name="HealthComponent" parent="." unique_id=575842100 instance=ExtResource("4_dqkch")]
 max_health = 3
 
 [node name="HurtboxComponent" type="Area2D" parent="." unique_id=1977011339]
@@ -288,48 +282,19 @@ body = NodePath("..")
 [node name="FSM" parent="." unique_id=1288971125 node_paths=PackedStringArray("initial_state") instance=ExtResource("8_ur7pv")]
 initial_state = NodePath("idle")
 
-[node name="Run" type="Node" parent="FSM" unique_id=480838032 node_paths=PackedStringArray("idle_state", "jump_state", "hurt_state", "player")]
-script = ExtResource("9_y4r1p")
-idle_state = NodePath("../idle")
-jump_state = NodePath("../Jump")
-hurt_state = NodePath("../Hurt")
-player = NodePath("../..")
-animation_name = "run"
+[node name="Run" type="Node" parent="FSM" unique_id=480838032]
 
-[node name="Hurt" type="Node" parent="FSM" unique_id=660478406 node_paths=PackedStringArray("run_state", "dead_state", "player")]
-script = ExtResource("10_3v2ag")
-run_state = NodePath("../Run")
-dead_state = NodePath("../Dead")
-player = NodePath("../..")
-animation_name = "hurt"
+[node name="Hurt" type="Node" parent="FSM" unique_id=660478406]
 
-[node name="Jump" type="Node" parent="FSM" unique_id=1912816114 node_paths=PackedStringArray("run_state", "idle_state", "hurt_state", "player")]
-script = ExtResource("10_d2wvv")
-run_state = NodePath("../Run")
-idle_state = NodePath("../idle")
-hurt_state = NodePath("../Hurt")
-player = NodePath("../..")
-animation_name = "jump"
+[node name="Jump" type="Node" parent="FSM" unique_id=1912816114]
 
-[node name="idle" type="Node" parent="FSM" unique_id=1429668932 node_paths=PackedStringArray("run_state", "jump_state", "hurt_state", "player")]
+[node name="idle" type="Node" parent="FSM" unique_id=1429668932]
 script = ExtResource("12_3v2ag")
-run_state = NodePath("../Run")
-jump_state = NodePath("../Jump")
-hurt_state = NodePath("../Hurt")
-player = NodePath("../..")
 animation_name = "idle"
 
-[node name="Dead" type="Node" parent="FSM" unique_id=1521747402 node_paths=PackedStringArray("player")]
-script = ExtResource("13_jej6c")
-player = NodePath("../..")
-animation_name = "death"
-
-[node name="HealthBar" type="CanvasLayer" parent="." unique_id=1680555171]
-
-[node name="HeartsContainer" parent="HealthBar" unique_id=820108024 instance=ExtResource("14_f1ej7")]
-
+[connection signal="animation_finished" from="AnimatedSprite2D" to="FSM/Hurt" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
-[connection signal="timeout" from="RespawnTimer" to="FSM/Dead" method="_on_respawn_timer_timeout"]
-[connection signal="died" from="PlayerHealthComponent" to="." method="_on_player_died"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
+[connection signal="died" from="HealthComponent" to="." method="_on_player_died"]
 [connection signal="area_entered" from="HurtboxComponent" to="HurtboxComponent" method="_on_area_entered"]
-[connection signal="hit" from="HurtboxComponent" to="." method="_on_hit"]
+[connection signal="hit" from="HurtboxComponent" to="FSM/Run" method="_on_hit"]

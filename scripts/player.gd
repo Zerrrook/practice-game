@@ -1,38 +1,34 @@
 extends CharacterBody2D
 class_name Player
 
-var is_alive := true
-var is_hurt := false
-var dying := false
-var direction := 0
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-
-@onready var health_component: HealthComponent = $HealthComponent
+# Turn nodes into variables
+@onready var player_health_component: PlayerHealthComponent = $PlayerHealthComponent
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var knockback_component: KnockbackComponent = $KnockbackComponent
 
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_machine: Node = $FSM
+@onready var coyote_timer: Timer = $CoyoteTimer
+@onready var respawn_timer: Timer = $RespawnTimer
 
-# Player logic
-func _physics_process(_delta: float) -> void:
-	move_and_slide()
+var pending_hit : Dictionary = {}
+var dying := false
+
+func _ready() -> void:
+	# Allows the player get "controlled" by the states
+	state_machine.init(self)
+
+func _unhandled_input(event: InputEvent) -> void:
+	state_machine.process_input(event)
 	
-# Player Component Hub
-# Triggered when the health component emits the died signal
-func _on_player_died():
+func _physics_process(delta: float) -> void:
+	state_machine.process_physics(delta)
+	
+func _process(delta: float) -> void:
+	state_machine.process_frame(delta)
+
+func _on_player_died() -> void:
 	dying = true
-	
-func die():
-	is_alive = false
-	Engine.time_scale = 0.5
-	animated_sprite.play("death")
-	respawn()
 
-func respawn():
-	#respawn_timer.start()
-	pass
-
-func _on_respawn_timer_timeout() -> void:
-	Engine.time_scale = 1.0
-	get_tree().reload_current_scene()
-	
+func _on_hit(hit_data: Variant) -> void:
+	pending_hit = hit_data

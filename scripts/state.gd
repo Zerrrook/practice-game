@@ -1,15 +1,20 @@
 extends Node
 class_name State
 
-signal state_transition (source_state: State, new_state_name: String, hit_data : Dictionary)
-func Enter(_hit_data : Dictionary = {}):
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var parent: Node
+func enter():
 	pass
 
-func Exit():
+func exit():
 	pass
 
-func Update(_delta: float):
+func process_input(_event : InputEvent):
 	pass
 
-func Physics_Update(_delta: float):
+
+func process_physics(_delta: float):
+	pass
+
+func process_frame(_delta: float):
 	pass
