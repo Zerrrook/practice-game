@@ -262,7 +262,7 @@ one_shot = true
 wait_time = 0.7
 
 [node name="JumpBufferTimer" type="Timer" parent="." unique_id=512983826]
-wait_time = 10.0
+wait_time = 0.8
 one_shot = true
 
 [node name="Sounds" type="Node2D" parent="." unique_id=1261229109]
@@ -336,6 +336,7 @@ animation_name = "death"
 
 [node name="HeartsContainer" parent="HealthBar" unique_id=820108024 instance=ExtResource("14_f1ej7")]
 
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="RespawnTimer" to="FSM/Dead" method="_on_respawn_timer_timeout"]
 [connection signal="died" from="PlayerHealthComponent" to="." method="_on_player_died"]
 [connection signal="area_entered" from="HurtboxComponent" to="HurtboxComponent" method="_on_area_entered"]

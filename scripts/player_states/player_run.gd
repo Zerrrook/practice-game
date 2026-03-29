@@ -6,28 +6,23 @@ class_name PlayerRun
 @export var hurt_state : State
 
 func process_input(_event : InputEvent):
-	if Input.is_action_just_pressed("jump") and (!player.coyote_timer.is_stopped() or player.is_on_floor()):
+	if player.move_component.wants_jump() and (!player.coyote_timer.is_stopped() or player.is_on_floor()):
 		# Go to the jump state when player pressed jumped and is on the floor or coyote time is still going.
 		return jump_state 
 
-func process_physics(delta: float):
-	
-	# Goes to the hit state if the player detects a hit
-	if player.pending_hit:
-		return hurt_state 
-	
+func process_physics(_delta: float):
 	# Coyote time gives leniency and fairness to the player
 	_coyote_timing()  
-	player.velocity.y += gravity * delta
 	
-	movement = Input.get_axis("move_left", "move_right") * speed
+	movement = player.move_component.get_movement_direction() * speed
 	
 	if movement == 0:
 		return idle_state # If not moving, go to idle state
 	
-	player.animated_sprite.flip_h = movement < 0 
+	animation_flipping(movement)
+	
 	player.velocity.x = movement
-	player.move_and_slide()
+	apply_gravity_and_move(_delta)
 	
 	return null
 

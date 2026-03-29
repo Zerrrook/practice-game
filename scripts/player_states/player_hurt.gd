@@ -7,7 +7,7 @@ class_name PlayerHurt
 @export var dead_state : State
 var duration := 0.12
 var timer := 0.0
-var dying 
+var dying : bool
 func enter():
 	super()
 	
@@ -25,10 +25,9 @@ func enter():
 	
 func process_physics(_delta: float):
 	timer -= _delta
-	player.velocity.y += gravity * _delta
 	player.knockback_component.process_knockback(_delta)
 	
-	player.move_and_slide()
+	apply_gravity_and_move(_delta)
 	
 	if timer <= 0:
 		if player.dying:

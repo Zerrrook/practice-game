@@ -2,7 +2,7 @@ extends Node
 class_name State
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var parent: Node
+var parent
 func enter():
 	pass
 
