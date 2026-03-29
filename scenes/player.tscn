@@ -11,8 +11,8 @@
 [ext_resource type="Script" uid="uid://dyblwbw1ku1mo" path="res://scripts/player_states/player_hurt.gd" id="10_3v2ag"]
 [ext_resource type="Script" uid="uid://hgbcwrvcrmxv" path="res://scripts/player_states/player_jump.gd" id="10_d2wvv"]
 [ext_resource type="Script" uid="uid://ckgcvohxuy10b" path="res://scripts/player_states/player_idle.gd" id="12_3v2ag"]
-[ext_resource type="Script" uid="uid://kahwbfagfjle" path="res://scripts/player_dead.gd" id="13_jej6c"]
-[ext_resource type="PackedScene" uid="uid://d1hbclu5qa0j4" path="res://scenes/GUI/hearts_container.tscn" id="14_f1ej7"]
+[ext_resource type="Script" uid="uid://kahwbfagfjle" path="res://scripts/player_states/player_dead.gd" id="13_jej6c"]
+[ext_resource type="PackedScene" uid="uid://d1hbclu5qa0j4" path="res://scenes/gui/hearts_container.tscn" id="14_f1ej7"]
 [ext_resource type="Script" uid="uid://konpfrhfkt0v" path="res://scripts/components/player_health_component.gd" id="15_oprun"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ujl30"]

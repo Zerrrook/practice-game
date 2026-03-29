@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d1hbclu5qa0j4"]
 
-[ext_resource type="Script" uid="uid://puo0r0rwiir7" path="res://scripts/hearts_container.gd" id="1_ytpqd"]
+[ext_resource type="Script" uid="uid://puo0r0rwiir7" path="res://scripts/player_gui/hearts_container.gd" id="1_ytpqd"]
 
 [node name="HeartsContainer" type="HBoxContainer" unique_id=820108024]
 offset_right = 40.0
