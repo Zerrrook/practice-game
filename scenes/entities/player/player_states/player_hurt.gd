@@ -8,28 +8,29 @@ class_name PlayerHurt
 var duration := 0.12
 var timer := 0.0
 var dying : bool
+
 func enter():
 	super()
 	
 	timer = duration
 	
-	var hit_data = player.pending_hit
-	player.pending_hit = {}
+	var hit_data = player.pending_hit # Get hit data from the pending hit
+	player.pending_hit = {} # Clears pending hit
 	
-	print(hit_data["damage"])
+	print("Received: " + str(hit_data["damage"])) 
 	hurt_sound.play()
-	player.player_health_component.damage_taken(hit_data["damage"])
+	player.player_health_component.damage_taken(hit_data["damage"]) # Send damage data
 		
 	# Applies knockback
-	player.knockback_component.apply_knockback(hit_data["knockback"], 300.0, duration)
+	player.knockback_component.apply_knockback(hit_data["knockback"], 300.0, duration) # Send knockback data
 	
 func process_physics(_delta: float):
 	timer -= _delta
-	player.knockback_component.process_knockback(_delta)
 	
+	player.knockback_component.process_knockback(_delta)
 	apply_gravity_and_move(_delta)
 	
-	if timer <= 0:
+	if timer <= 0: # Knockback will apply before dying or going to run state
 		if player.dying:
 			return dead_state
 		return run_state

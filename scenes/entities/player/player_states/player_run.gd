@@ -14,11 +14,10 @@ func process_physics(_delta: float):
 	# Coyote time gives leniency and fairness to the player
 	_coyote_timing()  
 	
-	movement = player.move_component.get_movement_direction() * speed
 	
+	movement = player.move_component.get_movement_direction() * speed 
 	if movement == 0:
 		return idle_state # If not moving, go to idle state
-	
 	animation_flipping(movement)
 	
 	player.velocity.x = movement

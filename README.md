@@ -1,7 +1,8 @@
 # practice-game
 Godot Platformer Game Practice
 
-Just trying to use the tutorial game from Brackeys to understand Godot even more.
+Just trying to use the tutorial game from Brackeys to understand Godot even more!
+Use Ctrl + M1 to go to a method's origin/documentation
 
 Tutorials that I have watched:
 Brackeys (The Game):

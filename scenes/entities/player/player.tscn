@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://cayewvh386mlo"]
 
-[ext_resource type="Texture2D" uid="uid://c3jifqhcpdk1m" path="res://assets/sprites/knight.png" id="1_3vyb7"]
-[ext_resource type="Script" uid="uid://fpdsplgbc6ju" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="AudioStream" uid="uid://diqbhg2wkhsly" path="res://assets/sounds/jump.wav" id="3_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://ciiq3ji4alxki" path="res://assets/sprites/knight.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://fpdsplgbc6ju" path="res://scenes/entities/player/player.gd" id="1_g2els"]
+[ext_resource type="AudioStream" uid="uid://dh6c2o54enj6i" path="res://assets/sounds/jump.wav" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://bdyb5joi2shm2" path="res://scripts/components/hurtbox_component.gd" id="5_qlg0r"]
-[ext_resource type="AudioStream" uid="uid://co0v7dgr5t4tg" path="res://assets/sounds/hurt.wav" id="6_tuyoq"]
-[ext_resource type="PackedScene" uid="uid://cx7j2b2vhx80w" path="res://scenes/knockback_component.tscn" id="7_fjrip"]
-[ext_resource type="Script" uid="uid://bhdfjs25l6ilk" path="res://scripts/components/move_component.gd" id="8_oprun"]
+[ext_resource type="AudioStream" uid="uid://bhg5ls2lg7fq0" path="res://assets/sounds/hurt.wav" id="6_tuyoq"]
+[ext_resource type="PackedScene" uid="uid://cx7j2b2vhx80w" path="res://scenes/components/knockback_component.tscn" id="7_fjrip"]
+[ext_resource type="PackedScene" uid="uid://cupmluqv6dojq" path="res://scenes/components/move_component.tscn" id="8_oprun"]
 [ext_resource type="PackedScene" uid="uid://gj4ocpnligrl" path="res://scenes/fsm.tscn" id="8_ur7pv"]
-[ext_resource type="Script" uid="uid://bsaeaqri0vf3l" path="res://scripts/player_states/player_run.gd" id="9_y4r1p"]
-[ext_resource type="Script" uid="uid://dyblwbw1ku1mo" path="res://scripts/player_states/player_hurt.gd" id="10_3v2ag"]
-[ext_resource type="Script" uid="uid://hgbcwrvcrmxv" path="res://scripts/player_states/player_jump.gd" id="10_d2wvv"]
-[ext_resource type="Script" uid="uid://ckgcvohxuy10b" path="res://scripts/player_states/player_idle.gd" id="12_3v2ag"]
-[ext_resource type="Script" uid="uid://kahwbfagfjle" path="res://scripts/player_states/player_dead.gd" id="13_jej6c"]
-[ext_resource type="PackedScene" uid="uid://d1hbclu5qa0j4" path="res://scenes/gui/hearts_container.tscn" id="14_f1ej7"]
+[ext_resource type="Script" uid="uid://bsaeaqri0vf3l" path="res://scenes/entities/player/player_states/player_run.gd" id="9_y4r1p"]
+[ext_resource type="Script" uid="uid://dyblwbw1ku1mo" path="res://scenes/entities/player/player_states/player_hurt.gd" id="10_3v2ag"]
+[ext_resource type="Script" uid="uid://hgbcwrvcrmxv" path="res://scenes/entities/player/player_states/player_jump.gd" id="10_d2wvv"]
+[ext_resource type="Script" uid="uid://ckgcvohxuy10b" path="res://scenes/entities/player/player_states/player_idle.gd" id="12_3v2ag"]
+[ext_resource type="Script" uid="uid://kahwbfagfjle" path="res://scenes/entities/player/player_states/player_dead.gd" id="13_jej6c"]
+[ext_resource type="PackedScene" uid="uid://d1hbclu5qa0j4" path="res://scenes/ui/hearts_container.tscn" id="14_f1ej7"]
 [ext_resource type="Script" uid="uid://konpfrhfkt0v" path="res://scripts/components/player_health_component.gd" id="15_oprun"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ujl30"]
@@ -290,8 +290,7 @@ debug_color = Color(0.97791487, 0.15013555, 0, 0.41960785)
 [node name="KnockbackComponent" parent="." unique_id=714660611 node_paths=PackedStringArray("body") instance=ExtResource("7_fjrip")]
 body = NodePath("..")
 
-[node name="MoveComponent" type="Node2D" parent="." unique_id=226740546]
-script = ExtResource("8_oprun")
+[node name="MoveComponent" parent="." unique_id=1390457778 instance=ExtResource("8_oprun")]
 
 [node name="FSM" parent="." unique_id=1288971125 node_paths=PackedStringArray("initial_state") instance=ExtResource("8_ur7pv")]
 initial_state = NodePath("idle")

@@ -1,14 +1,14 @@
 [gd_scene format=4 uid="uid://b2kltl7lh1xay"]
 
-[ext_resource type="Script" uid="uid://daeh83ydoxal" path="res://scripts/game_manager.gd" id="1_u5sy4"]
-[ext_resource type="PackedScene" uid="uid://cayewvh386mlo" path="res://scenes/player.tscn" id="1_uwrxv"]
-[ext_resource type="PackedScene" uid="uid://qelv3jvh7pi5" path="res://scenes/movingplatform.tscn" id="2_lnu2h"]
-[ext_resource type="Texture2D" uid="uid://3sg5x2utg0db" path="res://assets/sprites/world_tileset.png" id="2_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://n4eyodc2grve" path="res://scenes/coin.tscn" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://bxjg1l3w6gkhh" path="res://scenes/slime_green.tscn" id="6_p57ef"]
+[ext_resource type="Script" uid="uid://daeh83ydoxal" path="res://scripts/managers/game_manager.gd" id="1_limtx"]
+[ext_resource type="PackedScene" uid="uid://cayewvh386mlo" path="res://scenes/entities/player/player.tscn" id="2_7rg7d"]
+[ext_resource type="Texture2D" uid="uid://cceh7gnp1mkeo" path="res://assets/sprites/world_tileset.png" id="3_xmnyv"]
+[ext_resource type="PackedScene" uid="uid://qelv3jvh7pi5" path="res://scenes/components/movingplatform.tscn" id="4_cx7qy"]
+[ext_resource type="PackedScene" uid="uid://n4eyodc2grve" path="res://scenes/entities/collectables/coin/coin.tscn" id="5_uk881"]
+[ext_resource type="PackedScene" uid="uid://bxjg1l3w6gkhh" path="res://scenes/entities/enemies/slime/green/slime_green.tscn" id="6_r0gsk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
-texture = ExtResource("2_yqjtg")
+texture = ExtResource("3_xmnyv")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -258,9 +258,9 @@ _data = {
 
 [node name="GameManager" type="Node" parent="." unique_id=526343434]
 unique_name_in_owner = true
-script = ExtResource("1_u5sy4")
+script = ExtResource("1_limtx")
 
-[node name="Player" parent="." unique_id=949779467 instance=ExtResource("1_uwrxv")]
+[node name="Player" parent="." unique_id=949779467 instance=ExtResource("2_7rg7d")]
 position = Vector2(0, 32)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1944305627]
@@ -279,7 +279,7 @@ z_index = -1
 tile_map_data = PackedByteArray("AAADAAMAAAAJAAAAAAAFAAMAAAALAAAAAAAEAAMAAAAKAAAAAAALAAIAAAAJAAAAAAAPAAIAAAALAAAAAAAMAAIAAAAKAAAAAAANAAIAAAAKAAAAAAAOAAIAAAAKAAAAAAAIAPv/AAAJAAIAAAAKAPv/AAALAAIAAAAJAPv/AAAKAAIAAAAZAPv/AAAJAAAAAAA=")
 tile_set = SubResource("TileSet_lbhrr")
 
-[node name="MovingPlatform" parent="Entities/Platforms" unique_id=206872289 instance=ExtResource("2_lnu2h")]
+[node name="MovingPlatform" parent="Entities/Platforms" unique_id=206872289 instance=ExtResource("4_cx7qy")]
 position = Vector2(16, -39)
 collision_mask = 6
 
@@ -289,24 +289,24 @@ autoplay = &"move"
 
 [node name="Collectables" type="Node2D" parent="Entities" unique_id=1761646241]
 
-[node name="Coin4" parent="Entities/Collectables" unique_id=144206251 instance=ExtResource("4_lbhrr")]
+[node name="Coin4" parent="Entities/Collectables" unique_id=144206251 instance=ExtResource("5_uk881")]
 position = Vector2(352, -136)
 
-[node name="Coin5" parent="Entities/Collectables" unique_id=2122338107 instance=ExtResource("4_lbhrr")]
+[node name="Coin5" parent="Entities/Collectables" unique_id=2122338107 instance=ExtResource("5_uk881")]
 position = Vector2(152, -112)
 
-[node name="Coin" parent="Entities/Collectables" unique_id=428766794 instance=ExtResource("4_lbhrr")]
+[node name="Coin" parent="Entities/Collectables" unique_id=428766794 instance=ExtResource("5_uk881")]
 position = Vector2(72, 24)
 
-[node name="Coin2" parent="Entities/Collectables" unique_id=1151831697 instance=ExtResource("4_lbhrr")]
+[node name="Coin2" parent="Entities/Collectables" unique_id=1151831697 instance=ExtResource("5_uk881")]
 position = Vector2(400, -24)
 
-[node name="Coin3" parent="Entities/Collectables" unique_id=1794509918 instance=ExtResource("4_lbhrr")]
+[node name="Coin3" parent="Entities/Collectables" unique_id=1794509918 instance=ExtResource("5_uk881")]
 position = Vector2(-40, -72)
 
 [node name="Enemies" type="Node2D" parent="Entities" unique_id=498128719]
 
-[node name="SlimeGreen" parent="Entities/Enemies" unique_id=1514321458 instance=ExtResource("6_p57ef")]
+[node name="SlimeGreen" parent="Entities/Enemies" unique_id=1514321458 instance=ExtResource("6_r0gsk")]
 position = Vector2(272, 20)
 
 [node name="Decoration" type="Node2D" parent="." unique_id=1772464392]

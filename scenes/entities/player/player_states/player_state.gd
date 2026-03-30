@@ -17,9 +17,12 @@ var knockback_direction : Vector2
 func enter():
 	player.animated_sprite.play(animation_name) # Used when super() is called
 	pass
-func apply_gravity_and_move(delta):
+
+# Applies gravity and slide to states that need them
+func apply_gravity_and_move(delta): 
 	player.velocity.y += gravity * delta
 	player.move_and_slide()
 
+# If direction < 0, flip the sprite
 func animation_flipping(direction):
 	player.animated_sprite.flip_h = direction < 0 

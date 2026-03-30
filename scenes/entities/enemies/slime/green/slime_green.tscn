@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://bxjg1l3w6gkhh"]
 
-[ext_resource type="Texture2D" uid="uid://dnxbkk2lim031" path="res://assets/sprites/slime_green.png" id="1_mwm88"]
-[ext_resource type="Script" uid="uid://c2bchfowblbu8" path="res://scripts/slime.gd" id="1_qw3lm"]
-[ext_resource type="PackedScene" uid="uid://bhnv7oaixe558" path="res://scenes/health_component.tscn" id="3_qw3lm"]
+[ext_resource type="Texture2D" uid="uid://dhedgl1yilmc2" path="res://assets/sprites/slime_green.png" id="1_mwm88"]
+[ext_resource type="Script" uid="uid://c2bchfowblbu8" path="res://scenes/entities/enemies/slime/slime.gd" id="1_qw3lm"]
+[ext_resource type="PackedScene" uid="uid://bhnv7oaixe558" path="res://scenes/components/health_component.tscn" id="3_qw3lm"]
 [ext_resource type="Script" uid="uid://dq68lumw2e2kj" path="res://scripts/components/hitbox_component.gd" id="4_aelh5"]
+[ext_resource type="PackedScene" uid="uid://gj4ocpnligrl" path="res://scenes/fsm.tscn" id="5_aqssr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qk783"]
 atlas = ExtResource("1_mwm88")
@@ -94,3 +95,5 @@ script = ExtResource("4_aelh5")
 position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_aelh5")
 debug_color = Color(0.81996906, 0.0018099088, 0.9677313, 0.41960785)
+
+[node name="FSM" parent="." unique_id=1288971125 instance=ExtResource("5_aqssr")]

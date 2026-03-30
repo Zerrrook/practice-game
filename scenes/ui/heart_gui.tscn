@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://w6n8uvdnshld"]
 
-[ext_resource type="Texture2D" uid="uid://cxoo8tbqe1n31" path="res://assets/sprites/healthbar.png" id="1_1xhc3"]
-[ext_resource type="Script" uid="uid://cs4nldolve15p" path="res://scripts/player_gui/heart_gui.gd" id="1_mishr"]
+[ext_resource type="Script" uid="uid://cs4nldolve15p" path="res://ui_scripts/player_gui/heart_gui.gd" id="1_2jwwj"]
+[ext_resource type="Texture2D" uid="uid://buorb0lem1xhd" path="res://assets/sprites/healthbar.png" id="2_d0r25"]
 
 [node name="HeartsGui" type="Panel" unique_id=922049235]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(13, 13)
 offset_right = 15.0
 offset_bottom = 15.0
-script = ExtResource("1_mishr")
+script = ExtResource("1_2jwwj")
 
 [node name="Heart" type="Sprite2D" parent="." unique_id=1131636661]
-texture = ExtResource("1_1xhc3")
+texture = ExtResource("2_d0r25")
 centered = false
 vframes = 2

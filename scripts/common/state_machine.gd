@@ -3,10 +3,10 @@ extends Node
 @export var initial_state : State
 
 var current_state : State
-var parent 
+var owner_parent
 # Initializes the state machine by giving each child state a reference to the parent
 func init(parent):
-	self.parent = parent
+	self.owner_parent = parent
 	for child in get_children():
 		if child is State:
 			child.parent = parent
@@ -29,8 +29,8 @@ func process_input(event: InputEvent):
 
 func process_physics(delta: float):
 	
-	if parent.has_method("get_global_state"):
-		var forced_state = parent.get_global_state()
+	if owner_parent.has_method("get_global_state"):
+		var forced_state = owner_parent.get_global_state()
 		if forced_state:
 			change_state(forced_state)
 			return

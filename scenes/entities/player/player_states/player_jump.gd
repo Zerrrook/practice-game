@@ -12,15 +12,16 @@ func enter(): # Ignore hit_data
 	_jump()
 
 func process_physics(_delta: float):
-	movement = player.move_component.get_movement_direction() * speed
 	
+	# Allows movement when jumping
+	movement = player.move_component.get_movement_direction() * speed
 	if movement != 0:
 		animation_flipping(movement)
 
 	player.velocity.x = movement
 	apply_gravity_and_move(_delta)
-
-	if player.is_on_floor():
+	
+	if player.is_on_floor(): # Return to either idle or run state depending on movement
 		if movement != 0:
 			return run_state
 		return idle_state
