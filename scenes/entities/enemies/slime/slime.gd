@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Slime
 var speed : float = 30
 
 @onready var ray_right: RayCast2D = $RayCast/RayRight

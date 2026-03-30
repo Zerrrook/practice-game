@@ -308,6 +308,7 @@ position = Vector2(-40, -72)
 
 [node name="SlimeGreen" parent="Entities/Enemies" unique_id=1514321458 instance=ExtResource("6_r0gsk")]
 position = Vector2(272, 20)
+direction = null
 
 [node name="Decoration" type="Node2D" parent="." unique_id=1772464392]
 
