@@ -10,4 +10,7 @@ func _ready():
 func damage_taken(damage):
 	super(damage)
 	hearts_container.update_hearts(health)
-	
+		
+func heal_hp(heal_value):
+	super(heal_value)
+	hearts_container.update_hearts(health)

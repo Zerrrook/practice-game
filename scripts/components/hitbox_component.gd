@@ -8,5 +8,5 @@ func get_hit_data(target_position: Vector2):
 	
 	return {
 		"damage": damage,
-		"knockback": direction
+		"knockback_direction": direction
 	}

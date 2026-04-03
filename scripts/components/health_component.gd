@@ -16,3 +16,8 @@ func damage_taken(damage):
 		
 		if health <= 0:
 			died.emit()
+
+func heal_hp(heal_value):
+	if health < max_health:
+		health += heal_value
+		print(get_parent().name + " has: " + str(health) + " health")

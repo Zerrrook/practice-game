@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://dywp2ds3l82g7"]
+
+[ext_resource type="Script" uid="uid://nkfsnm7ve80j" path="res://scripts/autoload/transition_screen.gd" id="1_wnqol"]
+
+[sub_resource type="Animation" id="Animation_jnurq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1nnbl"]
+resource_name = "fade_to_black"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_indjc"]
+resource_name = "fade_to_normal"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ha2vg"]
+_data = {
+&"RESET": SubResource("Animation_jnurq"),
+&"fade_to_black": SubResource("Animation_1nnbl"),
+&"fade_to_normal": SubResource("Animation_indjc")
+}
+
+[node name="TransitionScreen" type="CanvasLayer" unique_id=1842882978]
+script = ExtResource("1_wnqol")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1740102398]
+root_node = NodePath("../ColorRect")
+libraries/ = SubResource("AnimationLibrary_ha2vg")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=302499647]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

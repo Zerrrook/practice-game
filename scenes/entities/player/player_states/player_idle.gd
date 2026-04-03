@@ -3,7 +3,6 @@ class_name PlayerIdle
 
 @export var run_state : State
 @export var jump_state : State
-@export var hurt_state : State
 
 func enter(): # Ignore hit_data
 	super()

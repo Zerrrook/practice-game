@@ -23,3 +23,5 @@ func _on_respawn_timer_timeout() -> void:
 func process_physics(_delta: float):
 	player.velocity.x = 0 # Sets the velocity to 0 when you die
 	apply_gravity_and_move(_delta)
+	
+	return null

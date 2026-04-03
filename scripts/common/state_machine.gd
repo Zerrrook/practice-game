@@ -28,7 +28,6 @@ func process_input(event: InputEvent):
 		change_state(new_state)
 
 func process_physics(delta: float):
-	
 	if owner_parent.has_method("get_global_state"):
 		var forced_state = owner_parent.get_global_state()
 		if forced_state:

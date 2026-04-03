@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://wxlmk4olfqwr"]
+
+[ext_resource type="Script" uid="uid://b4b31xi8df8nw" path="res://scenes/levels/checkpoints/fallback_point.gd" id="1_sfqwh"]
+
+[node name="FallbackPoint" type="Area2D" unique_id=1504199644]
+script = ExtResource("1_sfqwh")
+
+[node name="FallbackPointMarker" type="Marker2D" parent="." unique_id=248186851]
+position = Vector2(0, 8)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

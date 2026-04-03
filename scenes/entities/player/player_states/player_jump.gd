@@ -3,7 +3,6 @@ class_name PlayerJump
 
 @export var run_state : State
 @export var idle_state : State
-@export var hurt_state : State
 
 @onready var jump_sound: AudioStreamPlayer2D = $"../../Sounds/JumpSound"
 
@@ -14,26 +13,26 @@ func enter(): # Ignore hit_data
 func process_physics(_delta: float):
 	
 	# Allows movement when jumping
-	movement = player.move_component.get_movement_direction() * speed
-	if movement != 0:
-		animation_flipping(movement)
+	direction = player.move_component.get_movement_direction() * player.speed
+	if direction != 0:
+		animation_flipping(direction)
 
-	player.velocity.x = movement
+	player.velocity.x = direction
 	apply_gravity_and_move(_delta)
 	
 	if player.is_on_floor(): # Return to either idle or run state depending on movement
-		if movement != 0:
+		if direction != 0:
+			run_state.previous_direction = direction
 			return run_state
 		return idle_state
 		
 	return null
 	
+
 func _jump():
-	player.velocity.y = -jump_velocity
+	player.velocity.y = -player.jump_velocity
 	jump_sound.play()
 	
 #	After jumping, reset the Coyote timer.
 	player.coyote_timer.stop()
-	coyote_timer_activated = true
-
-	
+	player.coyote_timer_activated = true
